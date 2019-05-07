@@ -1,0 +1,254 @@
+{
+    "title": "Cloud Talent Solution",
+    "description": "Cloud Talent Solution provides the capability to create, read, update, and delete job postings, as well as search jobs based on keywords and filters.\n",
+    "docsUrl": "https://cloud.google.com/talent-solution/job-search/docs/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/jobs/v3/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://jobs.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "jobs_projects_companies_delete": {
+            "main": "./lib/actions/jobs_projects_companies_delete.js",
+            "title": "Deletes specified company.\nPrerequisite: The company has no jobs associated with it.",
+            "description": "Deletes specified company.\nPrerequisite: The company has no jobs associated with it.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_companies_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_companies_get": {
+            "main": "./lib/actions/jobs_projects_companies_get.js",
+            "title": "Retrieves specified company.",
+            "description": "Retrieves specified company.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_companies_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_companies_patch": {
+            "main": "./lib/actions/jobs_projects_companies_patch.js",
+            "title": "Updates specified company. Company names can't be updated. To update a\ncompany name, delete the company and all jobs associated with it, and only\nthen re-create them.",
+            "description": "Updates specified company. Company names can't be updated. To update a\ncompany name, delete the company and all jobs associated with it, and only\nthen re-create them.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_companies_patch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_complete": {
+            "main": "./lib/actions/jobs_projects_complete.js",
+            "title": "Completes the specified prefix with keyword suggestions.\nIntended for use by a job search auto-complete search box.",
+            "description": "Completes the specified prefix with keyword suggestions.\nIntended for use by a job search auto-complete search box.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_complete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_clientEvents_create": {
+            "main": "./lib/actions/jobs_projects_clientEvents_create.js",
+            "title": "Report events issued when end user interacts with customer's application\nthat uses Cloud Talent Solution. You may inspect the created events in\n[self service\ntools](https://console.cloud.google.com/talent-solution/overview).\n[Learn\nmore](https://cloud.google.com/talent-solution/job-search/docs/management-tools)\nabout self service tools.",
+            "description": "Report events issued when end user interacts with customer's application\nthat uses Cloud Talent Solution. You may inspect the created events in\n[self service\ntools](https://console.cloud.google.com/talent-solution/overview).\n[Learn\nmore](https://cloud.google.com/talent-solution/job-search/docs/management-tools)\nabout self service tools.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_clientEvents_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_companies_list": {
+            "main": "./lib/actions/jobs_projects_companies_list.js",
+            "title": "Lists all companies associated with the service account.",
+            "description": "Lists all companies associated with the service account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_companies_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_companies_create": {
+            "main": "./lib/actions/jobs_projects_companies_create.js",
+            "title": "Creates a new company entity.",
+            "description": "Creates a new company entity.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_companies_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_jobs_list": {
+            "main": "./lib/actions/jobs_projects_jobs_list.js",
+            "title": "Lists jobs by filter.",
+            "description": "Lists jobs by filter.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_jobs_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_jobs_create": {
+            "main": "./lib/actions/jobs_projects_jobs_create.js",
+            "title": "Creates a new job.\n\nTypically, the job becomes searchable within 10 seconds, but it may take\nup to 5 minutes.",
+            "description": "Creates a new job.\n\nTypically, the job becomes searchable within 10 seconds, but it may take\nup to 5 minutes.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_jobs_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_jobs_batchDelete": {
+            "main": "./lib/actions/jobs_projects_jobs_batchDelete.js",
+            "title": "Deletes a list of Jobs by filter.",
+            "description": "Deletes a list of Jobs by filter.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_jobs_batchDelete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_jobs_search": {
+            "main": "./lib/actions/jobs_projects_jobs_search.js",
+            "title": "Searches for jobs using the provided SearchJobsRequest.\n\nThis call constrains the visibility of jobs\npresent in the database, and only returns jobs that the caller has\npermission to search against.",
+            "description": "Searches for jobs using the provided SearchJobsRequest.\n\nThis call constrains the visibility of jobs\npresent in the database, and only returns jobs that the caller has\npermission to search against.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_jobs_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "jobs_projects_jobs_searchForAlert": {
+            "main": "./lib/actions/jobs_projects_jobs_searchForAlert.js",
+            "title": "Searches for jobs using the provided SearchJobsRequest.\n\nThis API call is intended for the use case of targeting passive job\nseekers (for example, job seekers who have signed up to receive email\nalerts about potential job opportunities), and has different algorithmic\nadjustments that are targeted to passive job seekers.\n\nThis call constrains the visibility of jobs\npresent in the database, and only returns jobs the caller has\npermission to search against.",
+            "description": "Searches for jobs using the provided SearchJobsRequest.\n\nThis API call is intended for the use case of targeting passive job\nseekers (for example, job seekers who have signed up to receive email\nalerts about potential job opportunities), and has different algorithmic\nadjustments that are targeted to passive job seekers.\n\nThis call constrains the visibility of jobs\npresent in the database, and only returns jobs the caller has\npermission to search against.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/jobs_projects_jobs_searchForAlert.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

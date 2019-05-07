@@ -1,0 +1,670 @@
+{
+    "type": "object",
+    "properties": {
+        "parent": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Input only.\n\nCreate job request.",
+            "properties": {
+                "job": {
+                    "description": "Required.\n\nThe Job to be created.",
+                    "properties": {
+                        "addresses": {
+                            "description": "Optional but strongly recommended for the best service experience.\n\nLocation(s) where the employer is looking to hire for this job posting.\n\nSpecifying the full street address(es) of the hiring location enables\nbetter API results, especially job searches by commute time.\n\nAt most 50 locations are allowed for best search performance. If a job has\nmore locations, it is suggested to split it into multiple jobs with unique\nrequisition_ids (e.g. 'ReqA' becomes 'ReqA-1', 'ReqA-2', etc.) as\nmultiple jobs with the same company_name, language_code and\nrequisition_id are not allowed. If the original requisition_id must\nbe preserved, a custom field should be used for storage. It is also\nsuggested to group the locations that close to each other in the same job\nfor better search experience.\n\nThe maximum number of allowed characters is 500.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "applicationInfo": {
+                            "description": "Required. At least one field within ApplicationInfo must be specified.\n\nJob application information.",
+                            "properties": {
+                                "emails": {
+                                    "description": "Optional but at least one of uris,\nemails or instruction must be\nspecified.\n\nUse this field to specify email address(es) to which resumes or\napplications can be sent.\n\nThe maximum number of allowed characters for each entry is 255.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "instruction": {
+                                    "description": "Optional but at least one of uris,\nemails or instruction must be\nspecified.\n\nUse this field to provide instructions, such as \"Mail your application\nto ...\", that a candidate can follow to apply for the job.\n\nThis field accepts and sanitizes HTML input, and also accepts\nbold, italic, ordered list, and unordered list markup tags.\n\nThe maximum number of allowed characters is 3,000.",
+                                    "type": "string"
+                                },
+                                "uris": {
+                                    "description": "Optional but at least one of uris,\nemails or instruction must be\nspecified.\n\nUse this URI field to direct an applicant to a website, for example to\nlink to an online application form.\n\nThe maximum number of allowed characters for each entry is 2,000.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "companyDisplayName": {
+                            "description": "Output only. Display name of the company listing the job.",
+                            "type": "string"
+                        },
+                        "companyName": {
+                            "description": "Required.\n\nThe resource name of the company listing the job, such as\n\"projects/api-test-project/companies/foo\".",
+                            "type": "string"
+                        },
+                        "compensationInfo": {
+                            "description": "Optional.\n\nJob compensation information.",
+                            "properties": {
+                                "annualizedBaseCompensationRange": {
+                                    "description": "Output only. Annualized base compensation range. Computed as\nbase compensation entry's CompensationEntry.compensation times\nCompensationEntry.expected_units_per_year.\n\nSee CompensationEntry for explanation on compensation annualization.",
+                                    "properties": {
+                                        "maxCompensation": {
+                                            "description": "Optional.\n\nThe maximum amount of compensation. If left empty, the value is set\nto a maximal compensation value and the currency code is set to\nmatch the currency code of\nmin_compensation.",
+                                            "properties": {
+                                                "currencyCode": {
+                                                    "description": "The 3-letter currency code defined in ISO 4217.",
+                                                    "type": "string"
+                                                },
+                                                "nanos": {
+                                                    "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "units": {
+                                                    "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "minCompensation": {
+                                            "description": "Optional.\n\nThe minimum amount of compensation. If left empty, the value is set\nto zero and the currency code is set to match the\ncurrency code of max_compensation.",
+                                            "properties": {
+                                                "currencyCode": {
+                                                    "description": "The 3-letter currency code defined in ISO 4217.",
+                                                    "type": "string"
+                                                },
+                                                "nanos": {
+                                                    "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "units": {
+                                                    "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "annualizedTotalCompensationRange": {
+                                    "description": "Output only. Annualized total compensation range. Computed as\nall compensation entries' CompensationEntry.compensation times\nCompensationEntry.expected_units_per_year.\n\nSee CompensationEntry for explanation on compensation annualization.",
+                                    "properties": {
+                                        "maxCompensation": {
+                                            "description": "Optional.\n\nThe maximum amount of compensation. If left empty, the value is set\nto a maximal compensation value and the currency code is set to\nmatch the currency code of\nmin_compensation.",
+                                            "properties": {
+                                                "currencyCode": {
+                                                    "description": "The 3-letter currency code defined in ISO 4217.",
+                                                    "type": "string"
+                                                },
+                                                "nanos": {
+                                                    "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "units": {
+                                                    "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "minCompensation": {
+                                            "description": "Optional.\n\nThe minimum amount of compensation. If left empty, the value is set\nto zero and the currency code is set to match the\ncurrency code of max_compensation.",
+                                            "properties": {
+                                                "currencyCode": {
+                                                    "description": "The 3-letter currency code defined in ISO 4217.",
+                                                    "type": "string"
+                                                },
+                                                "nanos": {
+                                                    "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "units": {
+                                                    "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "entries": {
+                                    "description": "Optional.\n\nJob compensation information.\n\nAt most one entry can be of type\nCompensationInfo.CompensationType.BASE, which is\nreferred as ** base compensation entry ** for the job.",
+                                    "items": {
+                                        "description": "A compensation entry that represents one component of compensation, such\nas base pay, bonus, or other compensation type.\n\nAnnualization: One compensation entry can be annualized if\n- it contains valid amount or range.\n- and its expected_units_per_year is set or can be derived.\nIts annualized range is determined as (amount or range) times\nexpected_units_per_year.",
+                                        "properties": {
+                                            "amount": {
+                                                "description": "Optional.\n\nCompensation amount.",
+                                                "properties": {
+                                                    "currencyCode": {
+                                                        "description": "The 3-letter currency code defined in ISO 4217.",
+                                                        "type": "string"
+                                                    },
+                                                    "nanos": {
+                                                        "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                        "format": "int32",
+                                                        "type": "integer"
+                                                    },
+                                                    "units": {
+                                                        "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                        "format": "int64",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "description": {
+                                                "description": "Optional.\n\nCompensation description.  For example, could\nindicate equity terms or provide additional context to an estimated\nbonus.",
+                                                "type": "string"
+                                            },
+                                            "expectedUnitsPerYear": {
+                                                "description": "Optional.\n\nExpected number of units paid each year. If not specified, when\nJob.employment_types is FULLTIME, a default value is inferred\nbased on unit. Default values:\n- HOURLY: 2080\n- DAILY: 260\n- WEEKLY: 52\n- MONTHLY: 12\n- ANNUAL: 1",
+                                                "format": "double",
+                                                "type": "number"
+                                            },
+                                            "range": {
+                                                "description": "Optional.\n\nCompensation range.",
+                                                "properties": {
+                                                    "maxCompensation": {
+                                                        "description": "Optional.\n\nThe maximum amount of compensation. If left empty, the value is set\nto a maximal compensation value and the currency code is set to\nmatch the currency code of\nmin_compensation.",
+                                                        "properties": {
+                                                            "currencyCode": {
+                                                                "description": "The 3-letter currency code defined in ISO 4217.",
+                                                                "type": "string"
+                                                            },
+                                                            "nanos": {
+                                                                "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "units": {
+                                                                "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                                "format": "int64",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "minCompensation": {
+                                                        "description": "Optional.\n\nThe minimum amount of compensation. If left empty, the value is set\nto zero and the currency code is set to match the\ncurrency code of max_compensation.",
+                                                        "properties": {
+                                                            "currencyCode": {
+                                                                "description": "The 3-letter currency code defined in ISO 4217.",
+                                                                "type": "string"
+                                                            },
+                                                            "nanos": {
+                                                                "description": "Number of nano (10^-9) units of the amount.\nThe value must be between -999,999,999 and +999,999,999 inclusive.\nIf `units` is positive, `nanos` must be positive or zero.\nIf `units` is zero, `nanos` can be positive, zero, or negative.\nIf `units` is negative, `nanos` must be negative or zero.\nFor example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "units": {
+                                                                "description": "The whole units of the amount.\nFor example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+                                                                "format": "int64",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": {
+                                                "description": "Optional.\n\nCompensation type.\n\nDefault is CompensationUnit.OTHER_COMPENSATION_TYPE.",
+                                                "enum": [
+                                                    "COMPENSATION_TYPE_UNSPECIFIED",
+                                                    "BASE",
+                                                    "BONUS",
+                                                    "SIGNING_BONUS",
+                                                    "EQUITY",
+                                                    "PROFIT_SHARING",
+                                                    "COMMISSIONS",
+                                                    "TIPS",
+                                                    "OTHER_COMPENSATION_TYPE"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "unit": {
+                                                "description": "Optional.\n\nFrequency of the specified amount.\n\nDefault is CompensationUnit.OTHER_COMPENSATION_UNIT.",
+                                                "enum": [
+                                                    "COMPENSATION_UNIT_UNSPECIFIED",
+                                                    "HOURLY",
+                                                    "DAILY",
+                                                    "WEEKLY",
+                                                    "MONTHLY",
+                                                    "YEARLY",
+                                                    "ONE_TIME",
+                                                    "OTHER_COMPENSATION_UNIT"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "customAttributes": {
+                            "additionalProperties": {
+                                "description": "Custom attribute values that are either filterable or non-filterable.",
+                                "properties": {
+                                    "filterable": {
+                                        "description": "Optional.\n\nIf the `filterable` flag is true, custom field values are searchable.\nIf false, values are not searchable.\n\nDefault is false.",
+                                        "type": "boolean"
+                                    },
+                                    "longValues": {
+                                        "description": "Optional but exactly one of string_values or long_values must\nbe specified.\n\nThis field is used to perform number range search.\n(`EQ`, `GT`, `GE`, `LE`, `LT`) over filterable `long_value`.\n\nCurrently at most 1 long_values is supported.",
+                                        "items": {
+                                            "format": "int64",
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "stringValues": {
+                                        "description": "Optional but exactly one of string_values or long_values must\nbe specified.\n\nThis field is used to perform a string match (`CASE_SENSITIVE_MATCH` or\n`CASE_INSENSITIVE_MATCH`) search.\nFor filterable `string_value`s, a maximum total number of 200 values\nis allowed, with each `string_value` has a byte size of no more than\n255B. For unfilterable `string_values`, the maximum total byte size of\nunfilterable `string_values` is 50KB.\n\nEmpty string is not allowed.",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "Optional.\n\nA map of fields to hold both filterable and non-filterable custom job\nattributes that are not covered by the provided structured fields.\n\nThe keys of the map are strings up to 64 bytes and must match the\npattern: a-zA-Z*. For example, key0LikeThis or\nKEY_1_LIKE_THIS.\n\nAt most 100 filterable and at most 100 unfilterable keys are supported.\nFor filterable `string_values`, across all keys at most 200 values are\nallowed, with each string no more than 255 characters. For unfilterable\n`string_values`, the maximum total size of `string_values` across all keys\nis 50KB.",
+                            "type": "object"
+                        },
+                        "degreeTypes": {
+                            "description": "Optional.\n\nThe desired education degrees for the job, such as Bachelors, Masters.",
+                            "items": {
+                                "enum": [
+                                    "DEGREE_TYPE_UNSPECIFIED",
+                                    "PRIMARY_EDUCATION",
+                                    "LOWER_SECONDARY_EDUCATION",
+                                    "UPPER_SECONDARY_EDUCATION",
+                                    "ADULT_REMEDIAL_EDUCATION",
+                                    "ASSOCIATES_OR_EQUIVALENT",
+                                    "BACHELORS_OR_EQUIVALENT",
+                                    "MASTERS_OR_EQUIVALENT",
+                                    "DOCTORAL_OR_EQUIVALENT"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "department": {
+                            "description": "Optional.\n\nThe department or functional area within the company with the open\nposition.\n\nThe maximum number of allowed characters is 255.",
+                            "type": "string"
+                        },
+                        "derivedInfo": {
+                            "description": "Output only. Derived details about the job posting.",
+                            "properties": {
+                                "jobCategories": {
+                                    "description": "Job categories derived from Job.title and Job.description.",
+                                    "items": {
+                                        "enum": [
+                                            "JOB_CATEGORY_UNSPECIFIED",
+                                            "ACCOUNTING_AND_FINANCE",
+                                            "ADMINISTRATIVE_AND_OFFICE",
+                                            "ADVERTISING_AND_MARKETING",
+                                            "ANIMAL_CARE",
+                                            "ART_FASHION_AND_DESIGN",
+                                            "BUSINESS_OPERATIONS",
+                                            "CLEANING_AND_FACILITIES",
+                                            "COMPUTER_AND_IT",
+                                            "CONSTRUCTION",
+                                            "CUSTOMER_SERVICE",
+                                            "EDUCATION",
+                                            "ENTERTAINMENT_AND_TRAVEL",
+                                            "FARMING_AND_OUTDOORS",
+                                            "HEALTHCARE",
+                                            "HUMAN_RESOURCES",
+                                            "INSTALLATION_MAINTENANCE_AND_REPAIR",
+                                            "LEGAL",
+                                            "MANAGEMENT",
+                                            "MANUFACTURING_AND_WAREHOUSE",
+                                            "MEDIA_COMMUNICATIONS_AND_WRITING",
+                                            "OIL_GAS_AND_MINING",
+                                            "PERSONAL_CARE_AND_SERVICES",
+                                            "PROTECTIVE_SERVICES",
+                                            "REAL_ESTATE",
+                                            "RESTAURANT_AND_HOSPITALITY",
+                                            "SALES_AND_RETAIL",
+                                            "SCIENCE_AND_ENGINEERING",
+                                            "SOCIAL_SERVICES_AND_NON_PROFIT",
+                                            "SPORTS_FITNESS_AND_RECREATION",
+                                            "TRANSPORTATION_AND_LOGISTICS"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "locations": {
+                                    "description": "Structured locations of the job, resolved from Job.addresses.\n\nlocations are exactly matched to Job.addresses in the same\norder.",
+                                    "items": {
+                                        "description": "Output only.\n\nA resource that represents a location with full geographic information.",
+                                        "properties": {
+                                            "latLng": {
+                                                "description": "An object representing a latitude/longitude pair.",
+                                                "properties": {
+                                                    "latitude": {
+                                                        "description": "The latitude in degrees. It must be in the range [-90.0, +90.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "description": "The longitude in degrees. It must be in the range [-180.0, +180.0].",
+                                                        "format": "double",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "locationType": {
+                                                "description": "The type of a location, which corresponds to the address lines field of\nPostalAddress. For example, \"Downtown, Atlanta, GA, USA\" has a type of\nLocationType#NEIGHBORHOOD, and \"Kansas City, KS, USA\" has a type of\nLocationType#LOCALITY.",
+                                                "enum": [
+                                                    "LOCATION_TYPE_UNSPECIFIED",
+                                                    "COUNTRY",
+                                                    "ADMINISTRATIVE_AREA",
+                                                    "SUB_ADMINISTRATIVE_AREA",
+                                                    "LOCALITY",
+                                                    "POSTAL_CODE",
+                                                    "SUB_LOCALITY",
+                                                    "SUB_LOCALITY_1",
+                                                    "SUB_LOCALITY_2",
+                                                    "NEIGHBORHOOD",
+                                                    "STREET_ADDRESS"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "postalAddress": {
+                                                "description": "Postal address of the location that includes human readable information,\nsuch as postal delivery and payments addresses. Given a postal address,\na postal service can deliver items to a premises, P.O. Box, or other\ndelivery location.",
+                                                "properties": {
+                                                    "addressLines": {
+                                                        "description": "Unstructured address lines describing the lower levels of an address.\n\nBecause values in address_lines do not have type information and may\nsometimes contain multiple values in a single field (e.g.\n\"Austin, TX\"), it is important that the line order is clear. The order of\naddress lines should be \"envelope order\" for the country/region of the\naddress. In places where this can vary (e.g. Japan), address_language is\nused to make it explicit (e.g. \"ja\" for large-to-small ordering and\n\"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of\nan address can be selected based on the language.\n\nThe minimum permitted structural representation of an address consists\nof a region_code with all remaining information placed in the\naddress_lines. It would be possible to format such an address very\napproximately without geocoding, but no semantic reasoning could be\nmade about any of the address components until it was at least\npartially resolved.\n\nCreating an address only containing a region_code and address_lines, and\nthen geocoding is the recommended way to handle completely unstructured\naddresses (as opposed to guessing which parts of the address should be\nlocalities or administrative areas).",
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "administrativeArea": {
+                                                        "description": "Optional. Highest administrative subdivision which is used for postal\naddresses of a country or region.\nFor example, this can be a state, a province, an oblast, or a prefecture.\nSpecifically, for Spain this is the province and not the autonomous\ncommunity (e.g. \"Barcelona\" and not \"Catalonia\").\nMany countries don't use an administrative area in postal addresses. E.g.\nin Switzerland this should be left unpopulated.",
+                                                        "type": "string"
+                                                    },
+                                                    "languageCode": {
+                                                        "description": "Optional. BCP-47 language code of the contents of this address (if\nknown). This is often the UI language of the input form or is expected\nto match one of the languages used in the address' country/region, or their\ntransliterated equivalents.\nThis can affect formatting in certain countries, but is not critical\nto the correctness of the data and will never affect any validation or\nother non-formatting related operations.\n\nIf this value is not known, it should be omitted (rather than specifying a\npossibly incorrect default).\n\nExamples: \"zh-Hant\", \"ja\", \"ja-Latn\", \"en\".",
+                                                        "type": "string"
+                                                    },
+                                                    "locality": {
+                                                        "description": "Optional. Generally refers to the city/town portion of the address.\nExamples: US city, IT comune, UK post town.\nIn regions of the world where localities are not well defined or do not fit\ninto this structure well, leave locality empty and use address_lines.",
+                                                        "type": "string"
+                                                    },
+                                                    "organization": {
+                                                        "description": "Optional. The name of the organization at the address.",
+                                                        "type": "string"
+                                                    },
+                                                    "postalCode": {
+                                                        "description": "Optional. Postal code of the address. Not all countries use or require\npostal codes to be present, but where they are used, they may trigger\nadditional validation with other parts of the address (e.g. state/zip\nvalidation in the U.S.A.).",
+                                                        "type": "string"
+                                                    },
+                                                    "recipients": {
+                                                        "description": "Optional. The recipient at the address.\nThis field may, under certain circumstances, contain multiline information.\nFor example, it might contain \"care of\" information.",
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "regionCode": {
+                                                        "description": "Required. CLDR region code of the country/region of the address. This\nis never inferred and it is up to the user to ensure the value is\ncorrect. See http://cldr.unicode.org/ and\nhttp://www.unicode.org/cldr/charts/30/supplemental/territory_information.html\nfor details. Example: \"CH\" for Switzerland.",
+                                                        "type": "string"
+                                                    },
+                                                    "revision": {
+                                                        "description": "The schema revision of the `PostalAddress`. This must be set to 0, which is\nthe latest revision.\n\nAll new revisions **must** be backward compatible with old revisions.",
+                                                        "format": "int32",
+                                                        "type": "integer"
+                                                    },
+                                                    "sortingCode": {
+                                                        "description": "Optional. Additional, country-specific, sorting code. This is not used\nin most regions. Where it is used, the value is either a string like\n\"CEDEX\", optionally followed by a number (e.g. \"CEDEX 7\"), or just a number\nalone, representing the \"sector code\" (Jamaica), \"delivery area indicator\"\n(Malawi) or \"post office indicator\" (e.g. Côte d'Ivoire).",
+                                                        "type": "string"
+                                                    },
+                                                    "sublocality": {
+                                                        "description": "Optional. Sublocality of the address.\nFor example, this can be neighborhoods, boroughs, districts.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "radiusInMiles": {
+                                                "description": "Radius in miles of the job location. This value is derived from the\nlocation bounding box in which a circle with the specified radius\ncentered from LatLng covers the area associated with the job location.\nFor example, currently, \"Mountain View, CA, USA\" has a radius of\n6.17 miles.",
+                                                "format": "double",
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": {
+                            "description": "Required.\n\nThe description of the job, which typically includes a multi-paragraph\ndescription of the company and related information. Separate fields are\nprovided on the job object for responsibilities,\nqualifications, and other job characteristics. Use of\nthese separate job fields is recommended.\n\nThis field accepts and sanitizes HTML input, and also accepts\nbold, italic, ordered list, and unordered list markup tags.\n\nThe maximum number of allowed characters is 100,000.",
+                            "type": "string"
+                        },
+                        "employmentTypes": {
+                            "description": "Optional.\n\nThe employment type(s) of a job, for example,\nfull time or\npart time.",
+                            "items": {
+                                "enum": [
+                                    "EMPLOYMENT_TYPE_UNSPECIFIED",
+                                    "FULL_TIME",
+                                    "PART_TIME",
+                                    "CONTRACTOR",
+                                    "CONTRACT_TO_HIRE",
+                                    "TEMPORARY",
+                                    "INTERN",
+                                    "VOLUNTEER",
+                                    "PER_DIEM",
+                                    "FLY_IN_FLY_OUT",
+                                    "OTHER_EMPLOYMENT_TYPE"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "incentives": {
+                            "description": "Optional.\n\nA description of bonus, commission, and other compensation\nincentives associated with the job not including salary or pay.\n\nThe maximum number of allowed characters is 10,000.",
+                            "type": "string"
+                        },
+                        "jobBenefits": {
+                            "description": "Optional.\n\nThe benefits included with the job.",
+                            "items": {
+                                "enum": [
+                                    "JOB_BENEFIT_UNSPECIFIED",
+                                    "CHILD_CARE",
+                                    "DENTAL",
+                                    "DOMESTIC_PARTNER",
+                                    "FLEXIBLE_HOURS",
+                                    "MEDICAL",
+                                    "LIFE_INSURANCE",
+                                    "PARENTAL_LEAVE",
+                                    "RETIREMENT_PLAN",
+                                    "SICK_DAYS",
+                                    "VACATION",
+                                    "VISION"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "jobEndTime": {
+                            "description": "Optional.\n\nThe end timestamp of the job. Typically this field is used for contracting\nengagements. Invalid timestamps are ignored.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "jobLevel": {
+                            "description": "Optional.\n\nThe experience level associated with the job, such as \"Entry Level\".",
+                            "enum": [
+                                "JOB_LEVEL_UNSPECIFIED",
+                                "ENTRY_LEVEL",
+                                "EXPERIENCED",
+                                "MANAGER",
+                                "DIRECTOR",
+                                "EXECUTIVE"
+                            ],
+                            "type": "string"
+                        },
+                        "jobStartTime": {
+                            "description": "Optional.\n\nThe start timestamp of the job in UTC time zone. Typically this field\nis used for contracting engagements. Invalid timestamps are ignored.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "languageCode": {
+                            "description": "Optional.\n\nThe language of the posting. This field is distinct from\nany requirements for fluency that are associated with the job.\n\nLanguage codes must be in BCP-47 format, such as \"en-US\" or \"sr-Latn\".\nFor more information, see\n[Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:\nclass=\"external\" target=\"_blank\" }.\n\nIf this field is unspecified and Job.description is present, detected\nlanguage code based on Job.description is assigned, otherwise\ndefaults to 'en_US'.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Required during job update.\n\nThe resource name for the job. This is generated by the service when a\njob is created.\n\nThe format is \"projects/{project_id}/jobs/{job_id}\",\nfor example, \"projects/api-test-project/jobs/1234\".\n\nUse of this field in job queries and API calls is preferred over the use of\nrequisition_id since this value is unique.",
+                            "type": "string"
+                        },
+                        "postingCreateTime": {
+                            "description": "Output only. The timestamp when this job posting was created.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "postingExpireTime": {
+                            "description": "Optional but strongly recommended for the best service\nexperience.\n\nThe expiration timestamp of the job. After this timestamp, the\njob is marked as expired, and it no longer appears in search results. The\nexpired job can't be deleted or listed by the DeleteJob and\nListJobs APIs, but it can be retrieved with the GetJob API or\nupdated with the UpdateJob API. An expired job can be updated and\nopened again by using a future expiration timestamp. Updating an expired\njob fails if there is another existing open job with same company_name,\nlanguage_code and requisition_id.\n\nThe expired jobs are retained in our system for 90 days. However, the\noverall expired job count cannot exceed 3 times the maximum of open jobs\ncount over the past week, otherwise jobs with earlier expire time are\ncleaned first. Expired jobs are no longer accessible after they are cleaned\nout.\n\nInvalid timestamps are ignored, and treated as expire time not provided.\n\nTimestamp before the instant request is made is considered valid, the job\nwill be treated as expired immediately.\n\nIf this value is not provided at the time of job creation or is invalid,\nthe job posting expires after 30 days from the job's creation time. For\nexample, if the job was created on 2017/01/01 13:00AM UTC with an\nunspecified expiration date, the job expires after 2017/01/31 13:00AM UTC.\n\nIf this value is not provided on job update, it depends on the field masks\nset by UpdateJobRequest.update_mask. If the field masks include\nexpiry_time, or the masks are empty meaning that every field is\nupdated, the job posting expires after 30 days from the job's last\nupdate time. Otherwise the expiration date isn't updated.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "postingPublishTime": {
+                            "description": "Optional.\n\nThe timestamp this job posting was most recently published. The default\nvalue is the time the request arrives at the server. Invalid timestamps are\nignored.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "postingRegion": {
+                            "description": "Optional.\n\nThe job PostingRegion (for example, state, country) throughout which\nthe job is available. If this field is set, a\nLocationFilter in a search query within the job region\nfinds this job posting if an exact location match isn't specified.\nIf this field is set to PostingRegion.NATION or\nPostingRegion.ADMINISTRATIVE_AREA, setting job Job.addresses\nto the same location level as this field is strongly recommended.",
+                            "enum": [
+                                "POSTING_REGION_UNSPECIFIED",
+                                "ADMINISTRATIVE_AREA",
+                                "NATION",
+                                "TELECOMMUTE"
+                            ],
+                            "type": "string"
+                        },
+                        "postingUpdateTime": {
+                            "description": "Output only. The timestamp when this job posting was last updated.",
+                            "format": "google-datetime",
+                            "type": "string"
+                        },
+                        "processingOptions": {
+                            "description": "Optional.\n\nOptions for job processing.",
+                            "properties": {
+                                "disableStreetAddressResolution": {
+                                    "description": "Optional.\n\nIf set to `true`, the service does not attempt to resolve a\nmore precise address for the job.",
+                                    "type": "boolean"
+                                },
+                                "htmlSanitization": {
+                                    "description": "Optional.\n\nOption for job HTML content sanitization. Applied fields are:\n\n* description\n* applicationInfo.instruction\n* incentives\n* qualifications\n* responsibilities\n\nHTML tags in these fields may be stripped if sanitiazation is not\ndisabled.\n\nDefaults to HtmlSanitization.SIMPLE_FORMATTING_ONLY.",
+                                    "enum": [
+                                        "HTML_SANITIZATION_UNSPECIFIED",
+                                        "HTML_SANITIZATION_DISABLED",
+                                        "SIMPLE_FORMATTING_ONLY"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "promotionValue": {
+                            "description": "Optional.\n\nA promotion value of the job, as determined by the client.\nThe value determines the sort order of the jobs returned when searching for\njobs using the featured jobs search call, with higher promotional values\nbeing returned first and ties being resolved by relevance sort. Only the\njobs with a promotionValue >0 are returned in a FEATURED_JOB_SEARCH.\n\nDefault value is 0, and negative values are treated as 0.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "qualifications": {
+                            "description": "Optional.\n\nA description of the qualifications required to perform the\njob. The use of this field is recommended\nas an alternative to using the more general description field.\n\nThis field accepts and sanitizes HTML input, and also accepts\nbold, italic, ordered list, and unordered list markup tags.\n\nThe maximum number of allowed characters is 10,000.",
+                            "type": "string"
+                        },
+                        "requisitionId": {
+                            "description": "Required.\n\nThe requisition ID, also referred to as the posting ID, assigned by the\nclient to identify a job. This field is intended to be used by clients\nfor client identification and tracking of postings. A job is not allowed\nto be created if there is another job with the same [company_name],\nlanguage_code and requisition_id.\n\nThe maximum number of allowed characters is 255.",
+                            "type": "string"
+                        },
+                        "responsibilities": {
+                            "description": "Optional.\n\nA description of job responsibilities. The use of this field is\nrecommended as an alternative to using the more general description\nfield.\n\nThis field accepts and sanitizes HTML input, and also accepts\nbold, italic, ordered list, and unordered list markup tags.\n\nThe maximum number of allowed characters is 10,000.",
+                            "type": "string"
+                        },
+                        "title": {
+                            "description": "Required.\n\nThe title of the job, such as \"Software Engineer\"\n\nThe maximum number of allowed characters is 500.",
+                            "type": "string"
+                        },
+                        "visibility": {
+                            "description": "Optional.\n\nThe visibility of the job.\n\nDefaults to Visibility.ACCOUNT_ONLY if not specified.",
+                            "enum": [
+                                "VISIBILITY_UNSPECIFIED",
+                                "ACCOUNT_ONLY",
+                                "SHARED_WITH_GOOGLE",
+                                "SHARED_WITH_PUBLIC"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
